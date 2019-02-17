@@ -1,0 +1,53 @@
+##################################################################
+## Packages / Stuen / Tnx to Cvoid for help         ##
+## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+##################################################################
+homeassistant:
+
+
+
+###########
+## Group ##
+###########
+group:
+
+  Sovevaerelset:
+    control: hidden
+    name: "Soveværelset"
+    view: no
+    entities:
+      - input_number.sove_hoevedg_lamper
+      - light.sovevaerelse_venstre 
+      - light.sovevaerelse_hojre
+      - group.hovedg
+
+  Hovedg:
+    control: hidden
+    name: "hovedg"
+    view: no
+    entities:
+      - light.sovevaerelse_venstre
+      - light.sovevaerelse_hojre
+
+### Sliders ###
+
+input_number:
+  sove_hoevedg_lamper:
+    name: sovehovedglamp
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+
+automation:
+
+  - alias: sengelamper
+    trigger:
+      platform: state
+      entity_id: input_number.stue_vaeg_lamper
+    action:
+      - service: light.turn_on
+        # Note the use of 'data_template:' below rather than the normal 'data:' if you weren't using an input variable
+        data_template:
+          entity_id: group.hovedg
+          brightness: "{{ trigger.to_state.state | int }}"

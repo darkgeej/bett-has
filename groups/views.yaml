@@ -1,0 +1,23 @@
+###VIEWS####
+
+#default_view:
+#  name: Dagen i dag
+#  view: yes
+#  entities:
+#    - group.wetter_all
+
+default_view:
+  name: sove
+  view: yes
+  icon: mdi:sleep
+  entities:
+    - group.sovevaerelset
+
+Stuen:
+  name: stuen
+  view: yes
+  icon: mdi:sofa
+  entities:
+    - group.stuen
+    - group.stue
+    
