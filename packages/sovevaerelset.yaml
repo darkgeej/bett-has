@@ -1,10 +1,8 @@
 ##################################################################
-## Packages / Stuen / Tnx to Cvoid for help         ##
-## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+## Packages / Stuen / Tnx to Cvoid for help                     ##
+## @darkgeej - https://github.com/darkgeej/bett-has             ##
 ##################################################################
 homeassistant:
-
-
 
 ###########
 ## Group ##
@@ -29,6 +27,7 @@ group:
       - light.sovevaerelse_venstre
       - light.sovevaerelse_hojre
 
+
 ### Sliders ###
 
 input_number:
@@ -38,6 +37,7 @@ input_number:
     min: 0
     max: 254
     step: 1
+
 
 automation:
 
