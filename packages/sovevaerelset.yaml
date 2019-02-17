@@ -15,9 +15,8 @@ group:
     view: no
     entities:
       - input_number.sove_hoevedg_lamper
-      - light.sovevaerelse_venstre 
+      - light.sovevaerelse_venstre
       - light.sovevaerelse_hojre
-      - group.hovedg
 
   Hovedg:
     control: hidden
