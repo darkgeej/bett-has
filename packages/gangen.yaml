@@ -1,40 +1,42 @@
 ##################################################################
-## Packages / Soveværelset / Tnx to Cvoid for help              ##
+## Packages / Gangen / Tnx to Cvoid for help                     ##
 ## @darkgeej - https://github.com/darkgeej/bett-has             ##
 ##################################################################
 homeassistant:
   customize:
 
-    input_number.sove_hoevedg_lamper:
+    input_number.gang_vaeg_lamper:
       icon: mdi:lightbulb-on-outline
-      friendly_name: Sengelamper
+      friendly_name: Væglamper i gangen
+
 
 ###########
 ## Group ##
 ###########
 group:
 
-  Sovevaerelset:
+  Gang:
     control: hidden
-    name: "Soveværelset"
+    name: "Gangen"
     view: no
     entities:
-      - input_number.sove_hoevedg_lamper
+      - input_number.gang_vaeg_lamper
 
-  Hovedg:
+  Ganglamp:
     control: hidden
-    name: "hovedg"
+    name: "Gangenlamper"
     view: no
     entities:
-      - light.sovevaerelse_venstre
-      - light.sovevaerelse_hojre
+      - light.hojre
+      - light.lance_venstre_g
 
-#############
-## Sliders ##
-#############
+
+###############
+### Sliders ###
+###############
 input_number:
-  sove_hoevedg_lamper:
-    name: sovehovedglamp
+  gang_vaeg_lamper:
+    name: gangvaeglamp
     initial: 254
     min: 0
     max: 254
@@ -42,16 +44,17 @@ input_number:
 
 
 ################
-## AUTOMATION ##
+## Automation ##
 ################
 automation:
 
-  - alias: Sengelamper
+  - alias: Væglamper i gangen
     trigger:
       platform: state
-      entity_id: input_number.sove_hoevedg_lamper
+      entity_id: input_number.gang_vaeg_lamper
     action:
       - service: light.turn_on
         data_template:
-          entity_id: group.hovedg
+          entity_id: group.ganglamp
           brightness: "{{ trigger.to_state.state | int }}"
+

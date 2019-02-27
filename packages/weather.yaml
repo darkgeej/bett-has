@@ -1,0 +1,17 @@
+##################################################################
+## Packages / Stuen / Tnx to Cvoid for help                     ##
+## @darkgeej - https://github.com/darkgeej/bett-has             ##
+##################################################################
+homeassistant:
+
+###########
+## Group ##
+###########
+group:
+
+  Weather:
+    control: hidden
+    name: "Vejr"
+    view: no
+    entities:
+      - weather.smhi_home

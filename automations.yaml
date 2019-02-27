@@ -1,1 +1,10 @@
-[]
+  - alias: lanterne1       
+    trigger:
+      platform: state
+      entity_id: input_number.light.lanterne  
+    action:
+      - service: light.turn_on
+        # Note the use of 'data_template:' below rather than the normal 'data:' if you weren't using an input variable
+        data_template:
+          entity_id: group.lillelanterne
+          brightness: "{{ trigger.to_state.state | int }}"

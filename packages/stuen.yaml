@@ -5,6 +5,10 @@
 homeassistant:
   customize:
 
+    input_number.stue_lille_lanterne:
+      icon: mdi:lightbulb-on-outline
+      friendly_name: Den lille lanterne
+
     input_number.stue_vindue_lamp:
       icon: mdi:lightbulb-on-outline
       friendly_name: Lampen i vinduet
@@ -12,7 +16,6 @@ homeassistant:
     input_number.stue_vaeg_lamper:
       icon: mdi:lightbulb-on-outline
       friendly_name: Væglamper
-
 
 ###########
 ## Group ##
@@ -26,7 +29,8 @@ group:
     entities:
       - input_number.stue_vaeg_lamper
       - input_number.stue_vindue_lamp
-  
+      - input_number.stue_lille_lanterne
+
   Vaeglampe:
     control: hidden
     name: "Vaeglamper"
@@ -35,9 +39,16 @@ group:
       - light.stuevenstre
       - light.stuehojre
 
+  Lillelanterne:
+    control: hidden
+    name: "denlillelanterne"
+    view: no
+    entities:
+      - light.lanterne
 
-### Sliders ###
-
+#############
+## Sliders ##
+#############
 input_number:
   stue_vaeg_lamper:
     name: stuenvaeglamp
@@ -53,7 +64,16 @@ input_number:
     max: 254
     step: 1
 
+  stue_lille_lanterne:
+    name: stuenlillelanterne
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
 
+################
+## AUTOMATION ##
+################
 automation:
 
   - alias: Stuen vaeglamper
@@ -76,4 +96,15 @@ automation:
         # Note the use of 'data_template:' below rather than the normal 'data:' if you weren't using an input variable
         data_template:
           entity_id: light.vindue_lampe
+          brightness: "{{ trigger.to_state.state | int }}"
+
+  - alias: Lille lanterne
+    trigger:
+      platform: state
+      entity_id: input_number.stue_lille_lanterne
+    action:
+      - service: light.turn_on
+        # Note the use of 'data_template:' below rather than the normal 'data:' if you weren't using an input variable
+        data_template:
+          entity_id: light.lanterne
           brightness: "{{ trigger.to_state.state | int }}"
