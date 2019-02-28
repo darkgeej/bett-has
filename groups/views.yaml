@@ -19,7 +19,6 @@ Soveværelset:
   entities:
     - group.sovevaerelset
     - group.sovevaerelset_2
-#    - light.sovevaerelse_venstre
 
 Stuen:
   control: hidden
@@ -29,3 +28,11 @@ Stuen:
   entities:
     - group.stuen
     - group.stue
+
+Altanen:
+  control: hidden
+  name: altanen
+  view: yes
+  icon: mdi:white-balance-sunny
+  entities:
+    - group.altan

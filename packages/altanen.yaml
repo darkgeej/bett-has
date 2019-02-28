@@ -1,0 +1,59 @@
+##################################################################
+## Packages / Altanen / Tnx to Cvoid for help                   ##
+## @darkgeej - https://github.com/darkgeej/bett-has             ##
+##################################################################
+homeassistant:
+  customize:
+
+    sensor.temperatur_altanen:
+      icon: mdi:temperature-celsius
+      friendly_name: Temperaturen på altanen
+
+    sensor.fugtighed_altanen:
+      icon: mdi:water-percent
+      friendly_name: Fugt på altanen
+
+    sensor.lux_altanen:
+      icon: mdi:weather-sunny
+      friendly_name: Lux på altanen
+
+
+###########
+## Group ##
+###########
+group:
+
+  Altan:
+    control: hidden
+    name: "Altanen"
+    view: no
+    entities:
+      - sensor.temperatur_altanen
+      - sensor.fugtighed_altanen
+      - sensor.lux_altanen
+
+
+#############
+## Sensors ##
+#############
+sensor:
+
+  - platform: mqtt
+    name: "Temperatur_altanen"
+    state_topic: "espaltanen/dht_altanen/Temperature"
+    qos: 0
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    name: "Fugtighed_altanen"
+    state_topic: "espaltanen/dht_altanen/Fugtighed"
+    qos: 0
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    name: "Lux_altanen"
+    state_topic: "espaltanen/lux_altanen/Lux"
+    qos: 0
+    unit_of_measurement: "Lux"
+
+

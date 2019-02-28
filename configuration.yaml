@@ -80,3 +80,9 @@ group: !include_dir_merge_named groups/
 #group: !include groups.yaml
 #automation: !include automations.yaml
 #script: !include scripts.yaml
+
+mqtt:
+  broker: !secret mqttip
+  port: 1883
+  client_id: home-assistant-1
+  keepalive: 60

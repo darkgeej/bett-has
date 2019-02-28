@@ -17,6 +17,7 @@ homeassistant:
       icon: mdi:lightbulb-on-outline
       friendly_name: Væglamper
 
+
 ###########
 ## Group ##
 ###########
@@ -46,6 +47,7 @@ group:
     entities:
       - light.lanterne
 
+
 #############
 ## Sliders ##
 #############
@@ -71,10 +73,13 @@ input_number:
     max: 254
     step: 1
 
+
 ################
-## AUTOMATION ##
+## Automation ##
 ################
 automation:
+
+### Slider auto ###
 
   - alias: Stuen vaeglamper
     trigger:
@@ -108,3 +113,39 @@ automation:
         data_template:
           entity_id: light.lanterne
           brightness: "{{ trigger.to_state.state | int }}"
+
+### Lux sensor on ###
+  - alias: "Auto tænd stuen"
+    initial_state: true
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.lux_altanen
+      below: 80
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: group.stue
+          brightness_pct: 75
+
+  - alias: "Auto tænd stuen"
+    initial_state: true
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.lux_altanen
+      below: 80
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: group.ganglamp       
+          brightness_pct: 80
+
+### Lux sensor off ###
+  - alias: "Auto sluk gangen"
+    initial_state: true
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.lux_sensor
+      above: 100
+    action:
+      - service: light.turn_off
+        entity_id: group.ganglamp
